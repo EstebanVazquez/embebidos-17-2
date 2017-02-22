@@ -1,3 +1,4 @@
+
 #archivo MAKEFILE
 
 PROYECTO=seno
@@ -5,13 +6,15 @@ DESTDIR=/usr/local/bin
 CFLAGS=-Wall
 LDFLAGS=-lm
 CC=gcc
+objects := $(patsubst %.c,%.o,$(wildcard *.c))
+
 
 all:	$(PROYECTO)
 
 %.o:	%.c
 	$(CC) -c $< $(CFLAGS)
 
-seno: main.o genera.o guarda.o
+$(PROYECTO): $(objects)
 	$(CC) $^ -o $@ $(LDFLAGS)
 
 .PHONY:	clean
